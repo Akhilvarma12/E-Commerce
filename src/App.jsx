@@ -9,6 +9,11 @@ import MyState from "./context/data/myState";
 import Signup from "./pages/registrattion/SignUp";
 import Login from "./pages/registrattion/Login";
 import ProductInfo from "./pages/productinfo/ProductInfo";
+import AddProduct from "./pages/admin/pages/AddProduct";
+import UpdateProduct from "./pages/admin/pages/UpdateProduct";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
@@ -20,11 +25,15 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/order" element={<Order />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/*" element={<NoPage />} />
             <Route path='/login' element={<Login/>}/>
             <Route path='/signup' element={<Signup/>}/>
             <Route path='productinfo/:id' element={<ProductInfo/>}/>
+            <Route path='/addproduct' element={<AddProduct/>} />
+            <Route path="/updateproduct" element={<UpdateProduct/>}/>
+            <Route path="/cart"  element={<Cart/>}/>
+            <Route path="/*" element={<NoPage />} />
           </Routes>
+          <ToastContainer/>
         </Router>
       </MyState>
     </>
