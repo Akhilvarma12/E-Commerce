@@ -4,7 +4,7 @@ import Footer from '../footer/Footer'
 
 function Layout({children}) {
   return (
-    <div>Layout
+    <div>
         <Navbar/>
         <div className="content">
             {children}

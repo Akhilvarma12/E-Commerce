@@ -1,6 +1,11 @@
 import React, { useContext } from 'react'
 import Layout from '../../components/layout/Layout'
 import myContext from '../../context/data/myContext'
+import HeroSection from '../../components/heroSection/HeroSection';
+import Filter from '../../components/filter/Filter';
+import ProductCard from '../../components/productCard/ProductCard';
+import Testimonial from '../../components/testimonial/Testimonial';
+import Track from '../../components/track/Track';
 
 function Home() {
   const context =useContext(myContext);
@@ -8,8 +13,11 @@ function Home() {
   const {name,age}=context
   return (
     <Layout>
-      <h1>Name:{name}</h1>
-      <h1>roll no:{age}</h1> 
+    <HeroSection/>
+    <Filter/>
+    <ProductCard/>
+    <Track/>
+    <Testimonial/>
     </Layout>
   )
 }

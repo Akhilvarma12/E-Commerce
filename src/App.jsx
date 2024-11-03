@@ -6,6 +6,9 @@ import Order from "./pages/order/order";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import NoPage from "./pages/nopage/NoPage";
 import MyState from "./context/data/myState";
+import Signup from "./pages/registrattion/SignUp";
+import Login from "./pages/registrattion/Login";
+import ProductInfo from "./pages/productinfo/ProductInfo";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
             <Route path="/order" element={<Order />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/*" element={<NoPage />} />
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/signup' element={<Signup/>}/>
+            <Route path='productinfo/:id' element={<ProductInfo/>}/>
           </Routes>
         </Router>
       </MyState>
