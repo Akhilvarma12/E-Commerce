@@ -9,6 +9,7 @@ import {
   doc,
   onSnapshot,
   query,
+  getDocs,
   QuerySnapshot,
   setDoc,
 } from "firebase/firestore";
@@ -84,9 +85,6 @@ function myState(props) {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    getProductData();
-  }, []);
   const editHandle=(item)=>{
     setProducts(item);
   }
@@ -117,6 +115,55 @@ function myState(props) {
       setLoading(false);
     }
   }
+  const [order, setOrder] = useState([]);
+
+  const getOrderData = async () => {
+    setLoading(true)
+    try {
+      const result = await getDocs(collection(fireDB, "order"))
+      const ordersArray = [];
+      result.forEach((doc) => {
+        ordersArray.push(doc.data());
+        setLoading(false)
+      });
+      setOrder(ordersArray);
+      console.log(ordersArray)
+      setLoading(false);
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+  }
+  const [user,setUser]=useState([])
+
+  const getUserData = async () => {
+    setLoading(true)
+    try {
+      const result = await getDocs(collection(fireDB, "users"))
+      const ordersArray = [];
+      result.forEach((doc) => {
+        ordersArray.push(doc.data());
+        setLoading(false)
+      });
+      setUser(ordersArray);
+      console.log("ooooo",ordersArray)
+      setLoading(false);
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+  }
+
+
+  useEffect(() => {
+    getProductData();
+    getOrderData()
+    getUserData();
+  }, []);
+
+  const [searchkey, setSearchkey] = useState('')
+  const [filterType, setFilterType] = useState('')
+  const [filterPrice, setFilterPrice] = useState('')
   return (
     <MyContext.Provider
       value={{
@@ -128,7 +175,12 @@ function myState(props) {
         setProducts,
         addProduct,
         product,
-        editHandle,updateProduct,deleteProduct
+        editHandle,updateProduct,deleteProduct,
+        order,
+        user,
+        searchkey,setSearchkey,
+        filterType,setFilterType,
+        filterPrice,setFilterPrice
       }}
     >
       {props.children}

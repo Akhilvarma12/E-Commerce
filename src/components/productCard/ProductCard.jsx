@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 
 function ProductCard() {
   const context = useContext(myContext);
-  const { mode, product } = context;
+  const { mode, product,searchkey,setSearchkey,
+    filterType,setFilterType,
+    filterPrice,setFilterPrice} = context;
   const dispatch=useDispatch();
     const cartItems=useSelector((state)=> state.cart)
     const addCart=(product)=>{
@@ -31,10 +33,12 @@ function ProductCard() {
         </div>
 
         <div className="flex flex-wrap -m-4">
-          {product.map((item,index)=>{
-            const {title,price,description,imageUrl}=item;
+        {product.filter((obj) => obj.title.toLowerCase().includes(searchkey))
+                        .filter((obj) => obj.category.toLowerCase().includes(filterType))
+                        .filter((obj) => obj.price.includes(filterPrice)).map((item, index) => {
+                            const { title, price, description, imageUrl } = item;
             return (
-                <div key={index} className="p-4 md:w-1/4  drop-shadow-lg ">
+                <div onClick={()=> window.location.href = `/productinfo/${item.id}`} key={index} className="p-4 md:w-1/4  drop-shadow-lg ">
             <div
               className="h-full border-2 hover:shadow-gray-100 hover:shadow-2xl transition-shadow duration-300 ease-in-out    border-gray-200 border-opacity-60 rounded-2xl overflow-hidden"
               style={{
@@ -62,7 +66,7 @@ function ProductCard() {
                 >
                   {title}
                 </h1>
-                {/* <p className="leading-relaxed mb-3">{item.description.}</p> */}
+              
                 <p
                   className="leading-relaxed mb-3"
                   style={{ color: mode === "dark" ? "white" : "" }}

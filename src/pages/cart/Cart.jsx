@@ -66,20 +66,7 @@ function Cart() {
           year: "numeric",
         }
       )
-  }
-  var options = {
-    key: "",
-    key_secret: "",
-    amount: parseInt(grandTotal * 100),
-    currency: "INR",
-    order_receipt: 'order_rcptid_' + name,
-    name: "E-Bharat",
-    description: "for testing purpose",
-    handler: function (response) {
-        console.log(response)
-        toast.success('Payment Successful')
-
-        const paymentId=response.Razorpay_payment_id;
+    }
 
         const orderInfo={
           cartItems,
@@ -102,16 +89,8 @@ function Cart() {
         } catch (error) {
           console.log(error)
         }
-    },
-
-    theme: {
-        color: "#3399cc"
     }
-};
 
-var pay = new window.Razorpay(options);
-pay.open();
-console.log(pay)
   return (
     <Layout>
       <div
